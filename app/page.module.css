@@ -1,0 +1,23 @@
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+.container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.container p {
+    margin-bottom: 1rem;
+}
+
+.webring {
+    margin-top: 2rem;
+}
+
+.webring a {
+    margin: 0.1rem;
+}
