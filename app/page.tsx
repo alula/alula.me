@@ -95,7 +95,7 @@ export default function Home() {
 			</div>
 
 			<div className={styles.webring}>
-				<p>Friends</p>
+				<p>webring</p>
 				{webring.map(({ name, url }) => (
 					<a href={url} key={name} target="_blank" rel="noreferrer">
 						<Image
