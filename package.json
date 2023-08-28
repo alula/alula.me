@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next-image-export-optimizer",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore ."
@@ -13,6 +13,7 @@
   "packageManager": "yarn@3.6.1",
   "dependencies": {
     "next": "^13.4.13",
+    "next-image-export-optimizer": "^1.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

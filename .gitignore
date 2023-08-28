@@ -202,4 +202,7 @@ sketch
 # and uncomment the following lines
 .pnp.*
 
+public/images
+public/nextImageExportOptimizer
+
 # End of https://www.toptal.com/developers/gitignore/api/nextjs,yarn,node,react

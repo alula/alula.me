@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import ExportedImage from "next-image-export-optimizer";
+import alula from "./alula.png";
 
 const socials = [
 	{
@@ -67,7 +69,7 @@ export default function Home() {
 	return (
 		<main className={styles.container}>
 			<h1>hello world</h1>
-			<p>{"My name's Laura, I go by Alula online."}</p>
+			<p>{"I go by Alula online, I like messing with computers and I often program or reverse engineer things."}</p>
 			<p>
 				Dump of my relevant socials:{" "}
 				{socials.map(({ name, url }, idx) => (
@@ -85,12 +87,11 @@ export default function Home() {
 				}
 			</p>
 			<div style={{ position: "relative", height: "60vh" }}>
-				<Image
-					src="/alula.png"
+				<ExportedImage
+					src={alula}
 					alt="alula"
-					unoptimized={true}
 					fill={true}
-					objectFit="contain"
+					style={{ objectFit: "contain" }}
 				/>
 			</div>
 
@@ -98,9 +99,10 @@ export default function Home() {
 				<p>webring</p>
 				{webring.map(({ name, url }) => (
 					<a href={url} key={name} target="_blank" rel="noreferrer">
-						<Image
+						<ExportedImage
 							src={`/webring/${name}.png`}
 							alt={name}
+							unoptimized={true}
 							width={88}
 							height={31}
 						/>
