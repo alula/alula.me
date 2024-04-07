@@ -48,8 +48,8 @@ const webring = [
 		url: "https://vendicated.dev",
 	},
 	{
-		name: "chloe",
-		url: "https://arciniega.one",
+		name: "sapphic",
+		url: "https://sapphic.moe",
 	},
 	{
 		name: "fleepy",
