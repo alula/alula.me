@@ -63,6 +63,10 @@ const webring = [
 		name: "colepaws",
 		url: "https://colepaws.pet",
 	},
+	{
+		name: "",
+		url: "https://jaisal.dev/",
+	},
 ];
 
 export default function Home() {
