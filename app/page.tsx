@@ -64,7 +64,7 @@ const webring = [
 		url: "https://colepaws.pet",
 	},
 	{
-		name: "",
+		name: "atomicbyte",
 		url: "https://jaisal.dev/",
 	},
 ];
@@ -104,7 +104,7 @@ export default function Home() {
 				{webring.map(({ name, url }) => (
 					<a href={url} key={name} target="_blank" rel="noreferrer">
 						<ExportedImage
-							src={`/webring/${name}.png`}
+							src={name == "atomicbyte" ? "/webring/atomicbyte.gif" : `/webring/${name}.png`}
 							alt={name}
 							unoptimized={true}
 							width={88}
