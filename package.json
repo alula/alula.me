@@ -6,26 +6,30 @@
     "dev": "next dev",
     "build": "next build && next-image-export-optimizer",
     "start": "next start",
+    "pages:build": "yarn exec next-on-pages",
+    "preview": "yarn run pages:build && wrangler pages dev",
+    "deploy": "yarn run pages:build && wrangler pages deploy",
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore ."
   },
   "type": "module",
-  "packageManager": "yarn@3.6.1",
+  "packageManager": "yarn@4.6.0",
   "dependencies": {
-    "next": "^13.4.13",
-    "next-image-export-optimizer": "^1.8.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "next": "^15.1.4",
+    "next-image-export-optimizer": "^1.18.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.5.0",
-    "@types/node": "^20.4.8",
-    "@types/react": "^18.2.19",
-    "@types/react-dom": "^18.2.7",
-    "eslint": "^8.46.0",
-    "eslint-config-next": "^13.4.13",
-    "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.1",
-    "typescript": "^5.1.6"
+    "@cloudflare/next-on-pages": "^1.13.7",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.4",
+    "@types/react-dom": "^19.0.2",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "^15.1.4",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "wrangler": "^3.101.0"
   }
 }

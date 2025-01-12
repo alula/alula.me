@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import ExportedImage from "next-image-export-optimizer";
 import alula from "./alula.png";
+import { getWebring } from "./lib/webring";
 
 const socials = [
 	{
@@ -22,54 +23,11 @@ const socials = [
 	},
 ];
 
-const webring = [
-	{
-		name: "alula",
-		url: "https://alula.me",
-	},
-	{
-		name: "espi",
-		url: "https://espi.me",
-	},
-	{
-		name: "adryd",
-		url: "https://adryd.com",
-	},
-	{
-		name: "megu",
-		url: "https://megu.dev",
-	},
-	{
-		name: "pala",
-		url: "https://palaiologos.rocks",
-	},
-	{
-		name: "ven",
-		url: "https://vendicated.dev",
-	},
-	{
-		name: "sapphic",
-		url: "https://sapphic.moe",
-	},
-	{
-		name: "fleepy",
-		url: "https://fleepy.tv",
-	},
-	{
-		name: "kot",
-		url: "https://yukata.tech",
-	},
-	{
-		name: "colepaws",
-		url: "https://colepaws.pet",
-	},
-	{
-		name: "atomicbyte",
-		url: "https://jaisal.dev/",
-	},
-];
+export const dynamic = 'force-static';
 
-export default function Home() {
+export default async function Home() {
+	const webring = await getWebring();
+
 	return (
 		<main className={styles.container}>
 			<h1>hello world</h1>
@@ -101,10 +59,10 @@ export default function Home() {
 
 			<div className={styles.webring}>
 				<p>webring</p>
-				{webring.map(({ name, url }) => (
+				{webring.map(({ name, url, imageFile }) => (
 					<a href={url} key={name} target="_blank" rel="noreferrer">
 						<ExportedImage
-							src={name == "atomicbyte" ? "/webring/atomicbyte.gif" : `/webring/${name}.png`}
+							src={`/webring/${imageFile || `${name}.png`}`}
 							alt={name}
 							unoptimized={true}
 							width={88}
