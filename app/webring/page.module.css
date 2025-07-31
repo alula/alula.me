@@ -19,3 +19,11 @@
 .container p {
 	margin-bottom: 1rem;
 }
+
+.webring {
+	margin-top: 2rem;
+}
+
+.webring a {
+	margin: 0.1rem;
+}

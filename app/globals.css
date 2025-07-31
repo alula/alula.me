@@ -1,17 +1,3 @@
-:root {
-	--background-rgb: 255, 231, 191;
-	--foreground-rgb: 229, 56, 16;
-	--link-rgb: 152, 33, 118;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background-rgb: 51, 24, 0;
-		--foreground-rgb: 255, 229, 153;
-		--link-rgb: 247, 155, 211;
-	}
-}
-
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -26,16 +12,21 @@ body {
 }
 
 body {
-	color: rgb(var(--foreground-rgb));
-	background: rgb(var(--background-rgb));
+	color: rgb(255, 170, 130);
+	background: rgb(10, 10, 10);
 }
 
 a {
-	color: rgb(var(--link-rgb));
+	color: rgb(210, 60, 130);
 }
 
 @media (prefers-color-scheme: dark) {
 	html {
 		color-scheme: dark;
 	}
+}
+
+/* I need to disable the annoying lack of padding on ul elements */
+ul {
+	padding-left: 1rem;
 }

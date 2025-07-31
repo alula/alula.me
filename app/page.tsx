@@ -1,8 +1,5 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import ExportedImage from "next-image-export-optimizer";
-import alula from "./alula.png";
-import { getWebring } from "./lib/webring";
+import { projectsHostedOnAlulaMe } from "./lib/projects";
 
 const socials = [
 	{
@@ -17,23 +14,19 @@ const socials = [
 		name: "Telegram",
 		url: "https://t.me/aluuula",
 	},
-	{
-		name: "Discord",
-		url: "https://discord.com/users/219067402174988290",
-	},
 ];
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 
-export default async function Home() {
-	const webring = await getWebring();
-
+export default function Home() {
 	return (
 		<main className={styles.container}>
 			<h1>hello world</h1>
-			<p>{"I go by Alula online, I like messing with computers and I often program or reverse engineer things."}</p>
 			<p>
-				Dump of my relevant socials:{" "}
+				I go by <b>Alula</b> online, I like messing with computers and I
+				often program or reverse engineer things.
+			</p>
+			<p>
 				{socials.map(({ name, url }, idx) => (
 					<>
 						{idx > 0 && ", "}
@@ -43,34 +36,29 @@ export default async function Home() {
 					</>
 				))}
 			</p>
-			<p>
-				{
-					"I'm too lazy to make a proper website (this was made within 20 minutes), here's my bunny fursona instead."
-				}
-			</p>
-			<div style={{ position: "relative", height: "60vh" }}>
-				<ExportedImage
-					src={alula}
-					alt="alula"
-					fill={true}
-					style={{ objectFit: "contain" }}
-				/>
-			</div>
 
-			<div className={styles.webring}>
-				<p>webring</p>
-				{webring.map(({ name, url, imageFile }) => (
-					<a href={url} key={name} target="_blank" rel="noreferrer">
-						<ExportedImage
-							src={`/webring/${imageFile || `${name}.png`}`}
-							alt={name}
-							unoptimized={true}
-							width={88}
-							height={31}
-						/>
-					</a>
-				))}
-			</div>
+			{/* <a href="/projects">
+				Maybe you want to see a list of some of the stuff I've worked on?
+			</a> */}
+
+			<details>
+				<summary>
+					Check out some of the fun things that are hosted here.
+				</summary>
+				<ul>
+					{projectsHostedOnAlulaMe.map((project) => (
+						<li key={project.name}>
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noreferrer"
+							>
+								{project.name}
+							</a>
+						</li>
+					))}
+				</ul>
+			</details>
 		</main>
 	);
 }
