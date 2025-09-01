@@ -6,12 +6,6 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		name: "Kero Blaster",
-		url: "https://playism.com/en/game/keroblaster/",
-		description:
-			"I was responsible for creating the Android and macOS ports of the game.",
-	},
-	{
 		name: "doukutsu-rs",
 		url: "https://doukutsu.rs",
 		description:
@@ -45,6 +39,12 @@ export const projects: Project[] = [
 			"A Godot Engine module that adds native playback support for PxTone (.ptcop, .pttune) music files.",
 	},
 	{
+		name: "Kero Blaster",
+		url: "https://playism.com/en/game/keroblaster/",
+		description:
+			"I was responsible for creating the Android and macOS ports of the game.",
+	},
+	{
 		name: "Xysspon",
 		url: "https://xysspon.com/",
 		description:
@@ -55,6 +55,18 @@ export const projects: Project[] = [
 		url: "https://github.com/alula/cf-workers-media-proxy",
 		description:
 			"A simple image media proxy written in Rust for Cloudflare Workers. Supports passthrough of SVG, PNG, JPEG, and WebP images, with options for resizing, quality, and format conversion. Easily integrates with Next.js via a custom image loader.",
+	},
+	{
+		name: "ryujinx-lle",
+		url: "https://github.com/alula/Ryujinx",
+		description:
+			"A WIP and super experimental fork of the Switch emulator Ryujinx aiming to run parts of the OS. Capable of going through the setup process and booting into the Home Menu. Does not really run any games yet.",
+	},
+	{
+		name: "checkbox.ing",
+		url: "https://github.com/alula/bitmap",
+		description:
+			"A collaborative website where people can check boxes together, made shortly after viral 1 Million Checkboxes has been shut down. It's been made with the goal to build a clone that can potentially scale better and handle more checkboxes with less resources. Uses lock-free atomics and a packet overhead efficient, zero-copy protocol.",
 	},
 	{
 		name: "Kyoko",
@@ -79,10 +91,28 @@ export const projects: Project[] = [
 			"A really tiny, pure JavaScript, Web Audio API-based player of Organya music files, most famously used in Studio Pixel's Cave Story.",
 	},
 	{
-		name: "ryujinx-lle",
-		url: "https://github.com/alula/Ryujinx",
+		name: "Craftcord (Discord Activity)",
+		url: "https://blog.pnly.io/craftcord/",
 		description:
-			"A WIP and super experimental fork of the Switch emulator Ryujinx aiming to run parts of the OS. Capable of going through the setup process and booting into the Home Menu. Does not really run any games yet.",
+			"Unreleased Discord Activity that allows merging things in a collaborative space and letting AI create combinations. I've been one of main developers of it.",
+	},
+	{
+		name: "Mainline Linux kernel port for MSM89x7/MSM8940",
+		url: "https://github.com/dreemurrs-embedded/linux-msm89x7",
+		description:
+			"Made some good progress, abandoned after I fried the Redmi 4X I used for this by accident because I didn't seat one of flex tapes properly after some repair work :(",
+	},
+	{
+		name: "Windows 10/11 for TP1803",
+		url: "https://github.com/alula/TP1803-Windows-Guide",
+		description:
+			"Windows for a prototype SM8150-based phone that a lot of cool folks from Android custom ROM development community have owned.",
+	},
+	{
+		name: "HX83112 digitizer driver for Windows",
+		url: "https://github.com/alula/HX83112-Windows-Driver",
+		description:
+			"A WIP driver for the touch panel used in TP1803, based on Gus' Synaptic digitizer Windows driver and the official Android driver.",
 	},
 ];
 

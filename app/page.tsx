@@ -1,19 +1,13 @@
 import styles from "./page.module.css";
 import { projectsHostedOnAlulaMe } from "./lib/projects";
+import { Fragment } from "react";
 
 const socials = [
-	{
-		name: "GitHub",
-		url: "https://github.com/alula",
-	},
-	{
-		name: "Twitter",
-		url: "https://twitter.com/__alula",
-	},
-	{
-		name: "Telegram",
-		url: "https://t.me/aluuula",
-	},
+	{ name: "GitHub", url: "https://github.com/alula" },
+	{ name: "X (formerly Twitter)", url: "https://x.com/__alula" },
+	{ name: "Telegram", url: "https://t.me/aluuula" },
+	{ name: "Bluesky", url: "https://bsky.app/profile/alula.me" },
+	{ name: "Discord Server", url: "https://discord.gg/5g9qdABNQ8" },
 ];
 
 export const dynamic = "force-static";
@@ -28,18 +22,25 @@ export default function Home() {
 			</p>
 			<p>
 				{socials.map(({ name, url }, idx) => (
-					<>
+					<Fragment key={name}>
 						{idx > 0 && ", "}
 						<a href={url} target="_blank" rel="noreferrer">
 							{name}
 						</a>
-					</>
+					</Fragment>
 				))}
 			</p>
 
-			{/* <a href="/projects">
-				Maybe you want to see a list of some of the stuff I've worked on?
-			</a> */}
+			<p>
+				<a href="/projects">
+					Maybe you want to see a list of some of the stuff I've
+					worked on?
+				</a>
+			</p>
+
+			<p>
+				<a href="/webring">Webring</a>
+			</p>
 
 			<details>
 				<summary>
