@@ -33,7 +33,7 @@ export default function Home() {
 
 			<p>
 				<a href="/projects">
-					Maybe you want to see a list of some of the stuff I've
+					Maybe you want to see a list of some of the stuff I&apos;ve
 					worked on?
 				</a>
 			</p>

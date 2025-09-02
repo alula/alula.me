@@ -13,7 +13,7 @@
     "format": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore ."
   },
   "type": "module",
-  "packageManager": "yarn@4.9.2",
+  "packageManager": "yarn@4.9.4",
   "dependencies": {
     "next": "^15.4.5",
     "next-image-export-optimizer": "^1.19.0",
