@@ -41,3 +41,4 @@ next-env.d.ts
 *.lock
 *.yml
 .next/*
+pnpm-lock.yaml

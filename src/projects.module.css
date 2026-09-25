@@ -1,0 +1,61 @@
+.container {
+	max-width: 1024px;
+	margin: 0 auto;
+	padding-top: 2rem;
+}
+
+.container h1 {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.container h2 {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.container p {
+	margin-bottom: 1rem;
+}
+
+.projectCards {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	gap: 1rem;
+}
+
+/* 3 columns on desktop, 2 on tablets, 1 on mobile */
+@media (min-width: 1024px) {
+	.projectCards {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (min-width: 768px) {
+	.projectCards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.projectCard {
+	background-color: rgba(255, 170, 130, 0.1);
+	border: 1px solid rgb(255, 170, 130, 0.2);
+	padding: 1rem;
+	border-radius: 0.5rem;
+}
+
+.projectCard a {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 0.5rem;
+}
+
+.projectCardHeader {
+	margin-bottom: 0.5rem;
+}
+
+.projectCardDescription {
+	font-size: 0.8rem;
+}

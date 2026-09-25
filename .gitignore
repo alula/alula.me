@@ -205,4 +205,10 @@ sketch
 public/images
 public/nextImageExportOptimizer
 
+dist-ssr
+
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
 # End of https://www.toptal.com/developers/gitignore/api/nextjs,yarn,node,react

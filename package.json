@@ -3,34 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next-image-export-optimizer",
-    "start": "next start",
-    "pages:build": "yarn exec next-on-pages",
-    "preview": "yarn run pages:build && wrangler pages dev",
-    "deploy": "yarn run pages:build && wrangler pages deploy",
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite preview",
+    "preview": "vite preview",
+    "deploy": "wrangler pages publish ./dist",
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore ."
   },
   "type": "module",
-  "packageManager": "yarn@4.9.4",
+  "packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264",
   "dependencies": {
-    "next": "^15.4.5",
-    "next-image-export-optimizer": "^1.19.0",
+    "@fontsource/cabin": "^5.2.8",
+    "@tanstack/react-router": "^1.157.16",
+    "@tanstack/react-router-devtools": "^1.157.16",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.13",
+    "@tanstack/router-plugin": "^1.157.16",
     "@types/node": "^24.1.0",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.1.2",
     "eslint": "^9.32.0",
-    "eslint-config-next": "^15.4.5",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
-    "vercel": "^44.6.5",
+    "vite": "^7.3.1",
     "wrangler": "^4.27.0"
   }
 }
