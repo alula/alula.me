@@ -1,0 +1,259 @@
+.hero {
+	/*
+	 * Side by side, the bubble sits over the frame's bottom left, so the 3D stage
+	 * must use its wide layout (word up top, beside her), which it picks from the
+	 * canvas aspect ratio (> 1.1, canvas = 118% of the frame's height). That layout
+	 * is in height units, so the frame is also kept at least as wide as the posters'
+	 * (canvas 1136x871), or the start of the word runs off the left edge. Hence the
+	 * frame is capped at width / 1.55 tall.
+	 */
+	--frame-h: min(clamp(34rem, 82vh, 48rem), 100cqw / 1.55);
+	container-type: inline-size;
+	display: grid;
+	max-width: var(--max);
+	margin: 0 auto;
+	padding: 3.5rem var(--gutter) 0;
+}
+
+/* registered so AlulaStage reads it resolved to pixels */
+@property --frame-radius {
+	syntax: "<length>";
+	inherits: true;
+	initial-value: 0px;
+}
+
+.frame {
+	/* also read by AlulaStage, which draws the sky into the frame */
+	--frame-radius: 2.25rem;
+	/* how much taller the 3D canvas is than the frame, so her ears poke out */
+	--stage-overscan: 1.18;
+	grid-area: 1 / 1;
+	position: relative;
+	height: var(--frame-h);
+	border-radius: var(--frame-radius);
+	box-shadow:
+		0 0 0 0.55rem var(--panel),
+		0 0 0 calc(0.55rem + 1px) var(--edge);
+	/* no entrance animation: transforming the frame while the 3D canvas inside it
+	   starts up made the first seconds stutter */
+}
+
+.model {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: calc(var(--stage-overscan) * 100%);
+	/* follow the sky's rounded bottom corners, the top stays open so her ears poke out */
+	clip-path: inset(
+		-50% 0 0 0 round 0 0 var(--frame-radius) var(--frame-radius)
+	);
+}
+
+/* the dance camera frames the sky frame, so then nothing pokes out */
+.model[data-dancing] {
+	clip-path: inset(
+		calc(100% - 100% / var(--stage-overscan)) 0 0 0 round
+			var(--frame-radius)
+	);
+}
+
+.badge {
+	position: absolute;
+	z-index: 3;
+	top: -1.75rem;
+	left: -1.25rem;
+	display: grid;
+	place-items: center;
+	width: clamp(5.5rem, 12vw, 8rem);
+	aspect-ratio: 1;
+	animation: badge-in 0.8s var(--spring) 0.7s both;
+}
+
+.badge svg {
+	position: absolute;
+	inset: 0;
+	animation: spin 14s linear infinite;
+}
+
+.badge circle {
+	fill: var(--yellow);
+	stroke: var(--lineart);
+	stroke-width: 1.6;
+}
+
+.badge text {
+	font-family: var(--font-mono);
+	font-size: 9.2px;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	fill: #2b1508;
+	text-transform: uppercase;
+}
+
+.badge span {
+	position: relative;
+	font-family: var(--font-mono);
+	font-weight: 800;
+	font-size: clamp(1rem, 2.4vw, 1.4rem);
+	color: #2b1508;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes badge-in {
+	from {
+		opacity: 0;
+		transform: scale(0) rotate(-120deg);
+	}
+}
+
+.bubble {
+	grid-area: 1 / 1;
+	align-self: end;
+	justify-self: start;
+	position: relative;
+	z-index: 3;
+	max-width: 27rem;
+	margin: 0 0 2.25rem 2.25rem;
+	padding: 1.4rem 1.6rem 1.5rem;
+	--alpha: 82%;
+	animation: bubble-in 0.8s var(--spring) 0.55s both;
+}
+
+/* Speech-bubble tail pointing at her. It only covers the outside of the bubble and
+   uses the same frosted tint as the wall it grows from, so it reads as one shape. */
+.tail {
+	--tail: color-mix(in srgb, var(--panel-shade) 92%, transparent);
+	position: absolute;
+	left: calc(100% - 1.5px);
+	top: 38%;
+	width: 1.1rem;
+	height: 2.2rem;
+	overflow: visible;
+	clip-path: polygon(0 0, 100% 50%, 0 100%);
+	-webkit-backdrop-filter: blur(14px) saturate(1.4);
+	backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.tail path:first-child {
+	fill: var(--tail);
+}
+
+.tail path:last-child {
+	fill: none;
+	stroke: var(--edge);
+	stroke-width: 1;
+	stroke-linejoin: round;
+	vector-effect: non-scaling-stroke;
+}
+
+@keyframes bubble-in {
+	from {
+		opacity: 0;
+		transform: translateY(2rem) scale(0.8) rotate(3deg);
+	}
+}
+
+.kicker {
+	font-family: var(--font-mono);
+	font-size: 0.8rem;
+	color: var(--ink-soft);
+}
+
+.bubble h1 {
+	margin: 0.1rem 0 0.4rem;
+	font-size: clamp(2rem, 4vw, 2.6rem);
+	font-weight: 700;
+	line-height: 1.05;
+}
+
+.name {
+	color: var(--orange-text);
+}
+
+/* On HDR screens in dark mode the name glows a touch past paper white, in an orange
+   more saturated than sRGB allows. SDR screens would get the PQ image tone mapped
+   to a duller orange, and light mode keeps the darker one for contrast. */
+@media (prefers-color-scheme: dark) and (dynamic-range: high) {
+	.name {
+		background: var(--hdr-accent-text) center / cover;
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+.bio {
+	color: var(--ink-soft);
+	line-height: 1.45;
+}
+
+.socials {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	margin-top: 1.1rem;
+	padding: 0;
+	list-style: none;
+}
+
+.socials li {
+	animation: chip-in 0.6s var(--spring) both;
+	animation-delay: calc(0.9s + var(--i) * 0.07s);
+}
+
+@keyframes chip-in {
+	from {
+		opacity: 0;
+		transform: translateY(0.8rem) scale(0.6);
+	}
+}
+
+.socials a {
+	display: block;
+	padding: 0.3rem 0.85rem;
+	border-radius: 999px;
+	corner-shape: round;
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+/* each link lights up in its own brand colour, with a matching HDR bloom */
+.socials a:hover {
+	--c: var(--brand);
+	--bloom: var(--brand-bloom);
+	color: #fff;
+}
+
+@media (max-width: 56rem) {
+	.hero {
+		--frame-h: clamp(28rem, 72vh, 36rem);
+		padding-top: 3rem;
+	}
+
+	.frame {
+		--stage-overscan: 1.08;
+	}
+
+	.bubble {
+		grid-area: 2 / 1;
+		justify-self: stretch;
+		max-width: none;
+		margin: 2rem 0 0;
+	}
+
+	/* same tail, turned to point up out of the top edge */
+	.tail {
+		--tail: color-mix(in srgb, var(--panel) 82%, transparent);
+		left: calc(50% - 0.55rem);
+		top: calc(-1.65rem + 1.5px);
+		transform: rotate(-90deg);
+	}
+}

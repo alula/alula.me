@@ -1,0 +1,13 @@
+.sky {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	border-radius: inherit;
+	/*
+	 * The stage's view at rest, prerendered at the stage canvas' height and centred
+	 * like it, so the stage takes over without a seam. Past the edges of the
+	 * render, the sky colour fills in.
+	 */
+	background: var(--sky-top) 50% 100% / auto
+		calc(var(--stage-overscan) * 100%) no-repeat;
+}

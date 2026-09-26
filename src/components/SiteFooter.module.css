@@ -1,0 +1,169 @@
+.footer {
+	--footer-bg: var(--orange);
+	--footer-deep: color-mix(in oklab, var(--orange-shade), var(--red) 45%);
+	position: relative;
+	margin-top: 6rem;
+	color: #2b1508;
+	/* orange where the wave meets it, fading down into coral */
+	background: linear-gradient(var(--footer-bg) 20%, var(--footer-deep));
+	isolation: isolate;
+	/* the wave is wider than the page for its scroll, but pokes out above */
+	overflow-x: clip;
+}
+
+/* orange hills sitting on top of the footer, so whatever is behind the page
+   (the fur spots) shows between them instead of being painted over */
+.wave {
+	position: absolute;
+	top: calc(-2.5rem + 1px);
+	left: 0;
+	width: 200%;
+	height: 2.5rem;
+	fill: var(--footer-bg);
+	animation: wave 9s linear infinite;
+}
+
+@keyframes wave {
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+/* Two soft glows drifting through the footer. The tinted HDR blooms from globals
+   are opaque, masked into blobs and partly transparent, so they land a bit above
+   paper white on HDR screens and read as a slow colour drift elsewhere. */
+.glow {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	background: var(--bloom-yellow) center / cover;
+	/* a drifting blob, feathered out towards the top so it never shows the seam
+	   where the wave meets the footer */
+	mask-image:
+		radial-gradient(closest-side, #000, transparent),
+		linear-gradient(transparent, #000 45%);
+	mask-size:
+		55% 160%,
+		100% 100%;
+	mask-repeat: no-repeat;
+	mask-position:
+		0% 30%,
+		0 0;
+	mask-composite: intersect;
+	opacity: 0.4;
+	pointer-events: none;
+	animation: drift 26s ease-in-out infinite alternate;
+}
+
+.glowB {
+	background-image: var(--bloom-blush);
+	mask-size:
+		45% 140%,
+		100% 100%;
+	mask-position:
+		100% 90%,
+		0 0;
+	opacity: 0.35;
+	animation-duration: 34s;
+	animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+	to {
+		mask-position:
+			100% 70%,
+			0 0;
+	}
+}
+
+.inner {
+	position: relative;
+	max-width: var(--max);
+	margin: 0 auto;
+	padding: 2rem var(--gutter) calc(2rem + env(safe-area-inset-bottom, 0px));
+	display: grid;
+	justify-items: center;
+	gap: 0.9rem;
+	text-align: center;
+}
+
+/* filled with the HDR white, so it glows a touch past paper white where it can */
+.signoff {
+	font-family: var(--font-display);
+	font-stretch: 125%;
+	font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+	font-weight: 700;
+	line-height: 1.05;
+	color: #fff7ee;
+	background: url("../assets/hdr-white.png") center / cover;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	filter: drop-shadow(0 0.12em 0 rgb(120 40 10 / 0.35));
+}
+
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.3rem 0.6rem;
+	padding: 0;
+	list-style: none;
+	font-weight: 600;
+}
+
+.links li + li::before {
+	content: "·";
+	margin-right: 0.6rem;
+	opacity: 0.6;
+}
+
+.links a {
+	text-decoration-thickness: 1.5px;
+	text-underline-offset: 3px;
+}
+
+.links a:hover {
+	text-decoration-style: wavy;
+}
+
+.fine {
+	max-width: 36rem;
+	margin-top: 0.4rem;
+	font-size: 0.8rem;
+	opacity: 0.75;
+}
+
+/* cream fur markings in the corners, clipped here since the footer itself can't
+   clip vertically (the wave pokes out above it) */
+.patches {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.patch {
+	position: absolute;
+	z-index: 0;
+	width: clamp(8rem, 18vw, 16rem);
+	aspect-ratio: 1;
+	fill: #fff7ee;
+	opacity: 0.16;
+	pointer-events: none;
+	overflow: visible;
+}
+
+.patchA {
+	left: -3rem;
+	bottom: -4rem;
+	rotate: 20deg;
+}
+
+.patchB {
+	right: 6%;
+	top: 1rem;
+	width: clamp(5rem, 10vw, 9rem);
+	rotate: -35deg;
+}

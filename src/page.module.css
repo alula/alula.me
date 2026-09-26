@@ -1,21 +1,61 @@
-.container {
-	max-width: 1024px;
-	margin: 0 auto;
-	padding-top: 2rem;
+.intro {
+	display: grid;
+	gap: 0.9rem;
+	max-width: 46rem;
+	margin: 3rem auto 0;
+	padding: 1.5rem 1.75rem;
+	font-size: 1.1rem;
 }
 
-.container h1 {
-	font-size: 2rem;
+.link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	color: var(--orange-text);
 	font-weight: 700;
-	margin-bottom: 1rem;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
 }
 
-.container h2 {
-	font-size: 1.25rem;
-	font-weight: 700;
-	margin-bottom: 1rem;
+.link:hover {
+	text-decoration-style: wavy;
 }
 
-.container p {
-	margin-bottom: 1rem;
+.link svg {
+	flex-shrink: 0;
+	width: 1em;
+	height: 1em;
+	transition: transform 0.35s var(--spring);
+}
+
+.link:hover svg {
+	transform: translate(2px, -2px) scale(1.2);
+}
+
+.hosted summary {
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.hosted summary::marker {
+	color: var(--orange-text);
+}
+
+.hosted ul {
+	display: grid;
+	gap: 0.25rem;
+	margin-top: 0.6rem;
+	padding-left: 1.5rem;
+}
+
+.hosted a {
+	color: var(--orange-text);
+	font-weight: 600;
+	text-underline-offset: 3px;
+}
+
+@media (max-width: 52rem) {
+	.intro {
+		margin-inline: var(--gutter);
+	}
 }

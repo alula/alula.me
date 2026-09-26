@@ -1,61 +1,38 @@
-.container {
-	max-width: 1024px;
+.body {
+	max-width: var(--max);
 	margin: 0 auto;
-	padding-top: 2rem;
+	padding: 0 var(--gutter);
 }
 
-.container h1 {
-	font-size: 2rem;
-	font-weight: 700;
-	margin-bottom: 1rem;
+.filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 2.75rem;
 }
 
-.container h2 {
-	font-size: 1.25rem;
-	font-weight: 700;
-	margin-bottom: 1rem;
+.filter {
+	padding: 0.3rem 0.9rem;
+	border-radius: 999px;
+	corner-shape: round;
+	color: #2b1508;
+	font-weight: 600;
+	font-size: 0.92rem;
 }
 
-.container p {
-	margin-bottom: 1rem;
+.filter:first-child {
+	--c: var(--panel);
+	color: var(--ink);
 }
 
-.projectCards {
+/* an outline rather than a box-shadow ring, which would replace the glass rim */
+.filter[aria-pressed="true"] {
+	outline: 2px solid var(--lineart);
+	outline-offset: 3px;
+}
+
+.cards {
 	display: grid;
-	grid-template-columns: repeat(1, 1fr);
-	gap: 1rem;
-}
-
-/* 3 columns on desktop, 2 on tablets, 1 on mobile */
-@media (min-width: 1024px) {
-	.projectCards {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@media (min-width: 768px) {
-	.projectCards {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-.projectCard {
-	background-color: rgba(255, 170, 130, 0.1);
-	border: 1px solid rgb(255, 170, 130, 0.2);
-	padding: 1rem;
-	border-radius: 0.5rem;
-}
-
-.projectCard a {
-	font-size: 1.25rem;
-	font-weight: 700;
-	margin-bottom: 0.5rem;
-}
-
-.projectCardHeader {
-	margin-bottom: 0.5rem;
-}
-
-.projectCardDescription {
-	font-size: 0.8rem;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+	gap: 2rem 1.5rem;
 }

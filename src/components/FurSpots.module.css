@@ -1,0 +1,45 @@
+.layer {
+	--scroll: 0;
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.defs {
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+.spot {
+	position: absolute;
+	top: var(--top);
+	left: var(--left);
+	width: clamp(9rem, calc(var(--size) * 1vw), 30rem);
+	aspect-ratio: 1;
+	overflow: visible;
+	translate: 0 calc(var(--scroll) * var(--depth) * -1px);
+	animation: breathe var(--dur) ease-in-out infinite alternate;
+	will-change: transform, translate;
+}
+
+.spot[data-tone="fur"] {
+	fill: var(--fur);
+	opacity: 0.32;
+}
+
+.spot[data-tone="light"] {
+	fill: var(--fur-light);
+	opacity: 0.9;
+}
+
+@keyframes breathe {
+	from {
+		transform: rotate(0deg) scale(1);
+	}
+	to {
+		transform: rotate(var(--spin)) scale(1.06, 0.97);
+	}
+}

@@ -1,0 +1,99 @@
+.header {
+	max-width: var(--max);
+	margin: 0 auto;
+	padding: 4rem var(--gutter) 2.5rem;
+}
+
+.kicker {
+	font-family: var(--font-mono);
+	font-size: 0.85rem;
+	color: var(--orange-text);
+	animation: rise 0.6s var(--spring) both;
+}
+
+.title {
+	position: relative;
+	display: inline-block;
+	margin: 0.2rem 0 0.8rem;
+	font-size: clamp(2.8rem, 9vw, 6rem);
+	font-weight: 700;
+	font-stretch: 125%;
+	line-height: 0.95;
+	letter-spacing: -0.02em;
+	white-space: pre-wrap;
+}
+
+.char {
+	position: relative;
+}
+
+.char:not([data-settled]) {
+	color: transparent;
+}
+
+.glyph {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	color: var(--ink);
+	transform: translateX(-50%);
+}
+
+/* On HDR screens in dark mode the title glows a touch past paper white (on SDR
+   the PQ image would tone map to a dull grey). Set per letter rather
+   than on the heading: clipping the heading's background to its text would also
+   paint the hidden real letters under the decoding glyphs. */
+@media (prefers-color-scheme: dark) and (dynamic-range: high) {
+	.char[data-settled],
+	.glyph {
+		background: var(--hdr-ink-text) center / cover;
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+.sparkle {
+	position: absolute;
+	top: -0.2em;
+	right: -0.55em;
+	width: 0.4em;
+	color: var(--yellow);
+	animation: spin-pop 3s var(--spring) infinite;
+}
+
+@keyframes spin-pop {
+	0%,
+	70% {
+		transform: scale(1) rotate(0deg);
+	}
+	85% {
+		transform: scale(1.4) rotate(90deg);
+	}
+	100% {
+		transform: scale(1) rotate(180deg);
+	}
+}
+
+.intro {
+	max-width: 42rem;
+	color: var(--ink-soft);
+	font-size: 1.1rem;
+	animation: rise 0.7s var(--spring) 0.2s both;
+}
+
+.intro p + p {
+	margin-top: 0.75rem;
+}
+
+.intro a {
+	color: var(--orange-text);
+	font-weight: 600;
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(1rem);
+	}
+}

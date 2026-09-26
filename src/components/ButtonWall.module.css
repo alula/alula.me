@@ -1,0 +1,164 @@
+.wall {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px;
+	padding: 0;
+	list-style: none;
+}
+
+.wall a {
+	display: block;
+	line-height: 0;
+}
+
+.wall img {
+	width: 88px;
+	height: 31px;
+	image-rendering: pixelated;
+}
+
+.wall a:hover img {
+	outline: 2px solid var(--orange);
+	outline-offset: 1px;
+}
+
+/* ---- link back card ---- */
+
+.linkBack {
+	display: grid;
+	gap: 1rem;
+	width: 100%;
+	max-width: 28rem;
+	padding: 1.2rem 1.3rem 1.4rem;
+}
+
+.head {
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+}
+
+.myButton {
+	position: relative;
+	flex-shrink: 0;
+	line-height: 0;
+	transition: transform 0.5s var(--spring);
+}
+
+.myButton img {
+	width: 88px;
+	height: 31px;
+	image-rendering: pixelated;
+	outline: 1.5px solid var(--lineart);
+	outline-offset: 2px;
+	border-radius: 1px;
+}
+
+.sparkle {
+	position: absolute;
+	top: -0.7rem;
+	right: -0.7rem;
+	width: 1.1rem;
+	color: var(--yellow);
+	animation: twinkle 2.4s var(--spring) infinite;
+}
+
+@keyframes twinkle {
+	50% {
+		transform: scale(0.45) rotate(90deg);
+	}
+}
+
+.title {
+	font-size: 1.3rem;
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+.sub {
+	color: var(--ink-soft);
+	font-size: 0.92rem;
+}
+
+.snippet {
+	position: relative;
+}
+
+.snippet code {
+	display: block;
+	padding: 0.8rem 0.9rem 1.3rem;
+	border: 1px solid var(--edge);
+	border-radius: 0.9rem 1rem 0.8rem 1.1rem;
+	background: color-mix(in srgb, var(--term) 88%, transparent);
+	color: var(--term-text);
+	font-family: var(--font-mono);
+	font-size: 0.74rem;
+	line-height: 1.6;
+	overflow-wrap: anywhere;
+	cursor: text;
+}
+
+.snippet code::selection,
+.snippet code *::selection {
+	background: var(--orange);
+	color: #2b1508;
+}
+
+.tag {
+	color: #ffb37a;
+}
+
+.attr {
+	color: #cbbcff;
+}
+
+.str {
+	color: #a8e8c8;
+}
+
+.copy {
+	--c: var(--yellow);
+	--bloom: var(--bloom-yellow);
+	position: absolute;
+	right: 0.8rem;
+	bottom: -1rem;
+	min-width: 5.5rem;
+	padding: 0.25rem 0.9rem;
+	border-radius: 999px;
+	corner-shape: round;
+	color: #2b1508;
+	font-weight: 700;
+	font-size: 0.9rem;
+	transform: rotate(-3deg);
+}
+
+.copy[data-copied] {
+	--c: var(--mint);
+	--bloom: var(--bloom-mint);
+	--cs: #77d0a4;
+}
+
+.copied {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	animation: pop 0.5s var(--spring);
+}
+
+.copied svg {
+	width: 0.9em;
+	color: var(--red);
+}
+
+@keyframes pop {
+	from {
+		transform: scale(0.4);
+	}
+}
+
+@supports (corner-shape: squircle) {
+	.snippet code {
+		corner-shape: squircle;
+		border-radius: 1.8rem;
+	}
+}

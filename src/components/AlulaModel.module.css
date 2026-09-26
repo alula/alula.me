@@ -1,0 +1,121 @@
+.model {
+	position: relative;
+	container-type: size;
+}
+
+.canvas {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 0.3s;
+	touch-action: pan-y;
+}
+
+.poster {
+	position: absolute;
+	bottom: 0;
+	width: auto;
+	height: 100%;
+	max-width: none;
+	opacity: 0;
+	transition: opacity 0.25s;
+	-webkit-user-drag: none;
+	user-select: none;
+}
+
+.poster[data-loaded] {
+	opacity: 1;
+}
+
+.posterWide {
+	right: 0;
+}
+
+.posterNarrow {
+	left: 50%;
+	translate: -50% 0;
+}
+
+@container (aspect-ratio > 1.1) {
+	.posterNarrow {
+		display: none;
+	}
+}
+
+@container (aspect-ratio <= 1.1) {
+	.posterWide {
+		display: none;
+	}
+}
+
+.model[data-ready] .canvas {
+	opacity: 1;
+}
+
+.model[data-ready] .poster {
+	visibility: hidden;
+	transition: visibility 0s 0.3s;
+	pointer-events: none;
+}
+
+.danceButton {
+	position: absolute;
+	right: 1.2rem;
+	bottom: 1rem;
+	display: grid;
+	place-items: center;
+	width: 2.8rem;
+	height: 2.8rem;
+	font-size: 2rem;
+	line-height: 1;
+	color: #fff7ee40;
+	filter: drop-shadow(0 1px 2px rgb(50 18 20 / 0.5));
+	animation: pop-in 0.7s var(--spring) both;
+}
+
+.note {
+	display: inline-block;
+	transition: transform 0.35s var(--spring);
+}
+
+.danceButton:hover .note {
+	transform: scale(1.15) rotate(-10deg);
+	color: #fff7ee90;
+}
+
+/* pressing lights the note up past paper white on HDR screens. No filter while
+   it does, filters would clamp the HDR fill back down */
+.danceButton:active {
+	filter: none;
+}
+
+.danceButton:active .note {
+	background: var(--bloom-yellow) center / cover;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	transform: scale(0.9);
+	transition-duration: 0.08s;
+}
+
+.danceButton[data-state="on"], .danceButton[data-state="on"]:hover .note {
+	color: var(--yellow);
+}
+
+@keyframes bop {
+	from {
+		transform: translateY(1px) rotate(-15deg);
+	}
+	to {
+		transform: translateY(-3px) rotate(15deg);
+	}
+}
+
+@keyframes pop-in {
+	from {
+		opacity: 0;
+		transform: scale(0.4) rotate(-10deg);
+	}
+}

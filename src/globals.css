@@ -1,33 +1,482 @@
+:root {
+	--cream: #fff7ee;
+	--cream-2: #ffeddb;
+	--card: #ffffff;
+	--ink: #3b2420;
+	--ink-soft: #7a5a52;
+	--line: rgb(59 36 32 / 0.14);
+	--orange: #ff8a3d;
+	--orange-deep: #f0641e;
+	--orange-text: #c24e0e;
+	--yellow: #ffc94a;
+	--red: #e0473a;
+	--blush: #ffc2c4;
+	--lavender: #cbbcff;
+	--mint: #a8e8c8;
+	--spot: #a37b73;
+	--sky-pale: #cfe9ff;
+	--sky-top: #4677de;
+	--sky-text: #1f5fc4;
+	--term: #2b1d27;
+	--term-text: #ffe9da;
+	--bg: var(--cream);
+
+	/* anime-style cel shading, lifted from the art: warm lineart, two-tone fills */
+	--lineart: #8a5448;
+	/* soft panel edge, paired with the glass rims instead of a drawn outline */
+	--edge: color-mix(in srgb, var(--lineart) 28%, transparent);
+	--panel: #fffaf4;
+	--panel-shade: #f8e4d4;
+	--orange-shade: #f26d27;
+	--yellow-shade: #f4a93a;
+	--sky-pale-shade: #a8d3f6;
+	/* how strong the glass rim highlights and shading are, per scheme */
+	--glass-reflex-light: 1;
+	--glass-reflex-dark: 1;
+	--fur: #9c7166;
+	--fur-light: #e8d2c6;
+
+	--radius: 1.5rem;
+	--gutter: clamp(1rem, 4vw, 2.5rem);
+	--max: 76rem;
+
+	--font-cute: "Mali", ui-rounded, system-ui, sans-serif;
+	/* chunky and wide for headings and the 3D wordmark, Mali for everything else */
+	--font-display:
+		"Fredoka Variable", "Fredoka", ui-rounded, system-ui, sans-serif;
+	--font-mono:
+		"SUSE Mono Variable", ui-monospace, "SFMono-Regular", monospace;
+
+	--spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+	color-scheme: light;
+}
+
+/* the sleepy rabbit hours */
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* burgundy and warm brown, like a dim room lit by a red lamp */
+		--cream: #1c1213;
+		--cream-2: #2a1a1c;
+		--card: #332022;
+		--ink: #fff0e3;
+		--ink-soft: #d4bcb4;
+		--line: rgb(255 240 227 / 0.13);
+		--orange-text: #ffa466;
+		--sky-pale: #3a2226;
+		--sky-top: #2e1420;
+		--sky-text: #f0b8a8;
+		--term: #150d0e;
+		--lineart: #6e4448;
+		--edge: color-mix(in srgb, var(--lineart) 60%, transparent);
+		--panel: #3b2426;
+		--panel-shade: #2d1b1d;
+		--sky-pale-shade: #2e1a1d;
+		/* faint highlights, heavier shading, so dark glass never glares */
+		--glass-reflex-light: 0.3;
+		--glass-reflex-dark: 2;
+		--fur: #6e4a44;
+		--fur-light: #3d2624;
+		color-scheme: dark;
+	}
+}
+
+/* a touch more vivid on wide-gamut screens */
+@media (color-gamut: p3) {
+	:root {
+		--orange: color(display-p3 1 0.53 0.2);
+		--orange-shade: color(display-p3 0.97 0.4 0.12);
+		--yellow: color(display-p3 1 0.8 0.2);
+		--yellow-shade: color(display-p3 0.98 0.62 0.14);
+		--red: color(display-p3 0.91 0.25 0.2);
+	}
+}
+
+@media (color-gamut: p3) and (prefers-color-scheme: light) {
+	:root {
+		--sky-top: color(display-p3 0.22 0.44 0.93);
+	}
+}
+
 * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
 }
 
-html,
-body {
-	max-width: 100vw;
-	overflow-x: hidden;
-	font-size: 20px;
-	font-family: "Cabin", sans-serif;
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
 }
 
 body {
-	color: rgb(255, 170, 130);
-	background: rgb(10, 10, 10);
+	min-height: 100vh;
+	overflow-x: clip;
+	font-family: var(--font-cute);
+	font-size: 1.0625rem;
+	line-height: 1.55;
+	color: var(--ink);
+	background: var(--bg);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* root wrapper, so the fur spots can sit behind everything for the full page height */
+.page {
+	position: relative;
+	isolation: isolate;
+	/* main soaks up the leftover height, so the footer sits at the bottom of short
+	   pages instead of leaving a strip of background under it */
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-height: 100dvh;
+}
+
+.page > main {
+	flex: 1;
+}
+
+/* Only ever stretch Fredoka to exactly 100% or 125%: its "/" collapses into a
+   tiny dash anywhere in between (broken variation data in the font). */
+h1,
+h2,
+h3 {
+	font-family: var(--font-display);
 }
 
 a {
-	color: rgb(210, 60, 130);
+	color: inherit;
 }
 
-@media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
+img {
+	max-width: 100%;
+	display: block;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: 0;
+	cursor: pointer;
+}
+
+::selection {
+	background: var(--orange);
+	color: #fff;
+}
+
+:focus-visible {
+	outline: 3px dashed var(--orange-deep);
+	outline-offset: 4px;
+	border-radius: 0.5rem;
 }
 
 /* I need to disable the annoying lack of padding on ul elements */
 ul {
 	padding-left: 1rem;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/*
+ * Cel-shaded surface: a hard-edged shade crescent along the bottom right and a
+ * rim light along the top left edge. Tint with --c (base) and --cs (shade), and --alpha
+ * for how much of the frosted backdrop shows through.
+ */
+.cel {
+	--cel-a: var(--alpha, 72%);
+	border: 1px solid var(--edge);
+	border-radius: 1.4rem 1.6rem 1.3rem 1.7rem / 1.5rem 1.3rem 1.7rem 1.4rem;
+	background: radial-gradient(
+		135% 160% at 10% 0%,
+		color-mix(in srgb, var(--c, var(--panel)) var(--cel-a), transparent) 70%,
+		color-mix(
+				in srgb,
+				var(--cs, var(--panel-shade)) calc(var(--cel-a) + 10%),
+				transparent
+			)
+			70.4%
+	);
+	/* a gentler take on the .glass rim below: bright crescent top left, faint one
+	   bottom right, and a soft lift instead of a drawn outline */
+	box-shadow:
+		inset 1.8px 3px 0 -2px
+			color-mix(
+				in srgb,
+				white calc(var(--glass-reflex-light) * 70%),
+				transparent
+			),
+		inset -2px -2px 0 -2px
+			color-mix(
+				in srgb,
+				white calc(var(--glass-reflex-light) * 40%),
+				transparent
+			),
+		0 1px 4px
+			color-mix(
+				in srgb,
+				black calc(var(--glass-reflex-dark) * 5%),
+				transparent
+			),
+		0 0.8rem 1.6rem -0.9rem
+			color-mix(
+				in srgb,
+				black calc(var(--glass-reflex-dark) * 18%),
+				transparent
+			);
+	-webkit-backdrop-filter: blur(14px) saturate(1.4);
+	backdrop-filter: blur(14px) saturate(1.4);
+}
+
+/*
+ * Liquid glass, for things you press. Tinted with --c. A specular highlight tracks
+ * the pointer (--gx/--gy, set by lib/glass.ts) and hovering or pressing lights an
+ * HDR bloom under it in the button's own colour (--bloom): an opaque PQ-tagged
+ * image at ~3.5x SDR white, shaped by a mask. It has to be that bright because
+ * opacity scales luminance and a dimmer, partly faded bloom never clears SDR white.
+ * Plain tinted light on SDR screens.
+ */
+.glass {
+	--tint: var(--c, var(--panel));
+	position: relative;
+	isolation: isolate;
+	--light: rgb(255 255 255);
+	--dark: rgb(0 0 0);
+	border: none;
+	background:
+		linear-gradient(rgb(255 255 255 / 0.07), transparent 55%),
+		color-mix(in srgb, var(--tint) 82%, transparent);
+	/*
+	 * A physical-looking rim from stacked inset shadows with negative spread, so each
+	 * only peeks out as a thin crescent that follows the rounded shape: a bright rim
+	 * top left, a weaker one where light exits bottom right, dark crescents between
+	 * them for thickness. Adapted from fooontic's Liquid Glass Switcher (CodePen).
+	 */
+	box-shadow:
+		inset 0 0 0 1px
+			color-mix(
+				in srgb,
+				var(--light) calc(var(--glass-reflex-light) * 10%),
+				transparent
+			),
+		inset 1.8px 3px 0 -2px
+			color-mix(
+				in srgb,
+				var(--light) calc(var(--glass-reflex-light) * 90%),
+				transparent
+			),
+		inset -2px -2px 0 -2px
+			color-mix(
+				in srgb,
+				var(--light) calc(var(--glass-reflex-light) * 80%),
+				transparent
+			),
+		inset -3px -8px 1px -6px
+			color-mix(
+				in srgb,
+				var(--light) calc(var(--glass-reflex-light) * 60%),
+				transparent
+			),
+		inset -0.3px -1px 4px 0
+			color-mix(
+				in srgb,
+				var(--dark) calc(var(--glass-reflex-dark) * 12%),
+				transparent
+			),
+		inset -1.5px 2.5px 0 -2px
+			color-mix(
+				in srgb,
+				var(--dark) calc(var(--glass-reflex-dark) * 20%),
+				transparent
+			),
+		inset 0 3px 4px -2px
+			color-mix(
+				in srgb,
+				var(--dark) calc(var(--glass-reflex-dark) * 20%),
+				transparent
+			),
+		inset 2px -6.5px 1px -4px
+			color-mix(
+				in srgb,
+				var(--dark) calc(var(--glass-reflex-dark) * 10%),
+				transparent
+			),
+		0 1px 5px 0
+			color-mix(
+				in srgb,
+				var(--dark) calc(var(--glass-reflex-dark) * 10%),
+				transparent
+			),
+		0 6px 16px 0
+			color-mix(
+				in srgb,
+				var(--dark) calc(var(--glass-reflex-dark) * 8%),
+				transparent
+			);
+	/* a slight hue shift on whatever shows through, like light bending in glass */
+	--glass-hue: 12deg;
+	-webkit-backdrop-filter: blur(8px) saturate(1.8)
+		hue-rotate(var(--glass-hue));
+	backdrop-filter: blur(8px) saturate(1.8) hue-rotate(var(--glass-hue));
+}
+
+.glass::before,
+.glass::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	border-radius: inherit;
+	corner-shape: inherit;
+	pointer-events: none;
+	transition: opacity 0.35s;
+}
+
+.glass::before {
+	background: radial-gradient(
+		circle at var(--gx, 30%) var(--gy, 0%),
+		rgb(255 255 255 / 0.8),
+		transparent 60%
+	);
+	/* soft-light lifts the tint underneath instead of painting white over it */
+	mix-blend-mode: soft-light;
+	opacity: 0;
+}
+
+.glass::after {
+	background: var(--bloom, var(--bloom-panel)) center / cover;
+	mask-image: radial-gradient(
+		circle at var(--gx, 50%) var(--gy, 50%),
+		#000,
+		transparent 70%
+	);
+	opacity: 0;
+}
+
+.glass:hover::before {
+	opacity: 0.45;
+}
+
+.glass:hover::after {
+	opacity: 0.25;
+}
+
+.glass:active::after {
+	opacity: 0.6;
+	transition-duration: 0.08s;
+}
+
+/* Real squircles where the browser can do them. They read smaller than circular
+   corners at the same radius, so the radius goes up to compensate. */
+@supports (corner-shape: squircle) {
+	.cel {
+		corner-shape: squircle;
+		border-radius: 2.6rem;
+	}
+}
+
+/* Scroll reveal, driven by useInView in components/Reveal.tsx */
+[data-reveal] {
+	opacity: 0;
+	transform: translateY(2.5rem) scale(0.94) rotate(var(--reveal-tilt, -2deg));
+	transition:
+		opacity 0.5s var(--ease-out),
+		transform 0.9s var(--spring);
+	transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+[data-reveal][data-in] {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		transition-delay: 0s !important;
+	}
+
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
+
+/*
+ * Keeps an HDR image on screen at all times so the display stays in HDR mode and
+ * the button blooms don't wait on a mode switch (same trick as hdrify).
+ */
+:root {
+	dynamic-range-limit: no-limit;
+
+	/* tinted HDR blooms for .glass, see scripts/makeHdrBlooms.mjs */
+	--bloom-white: url("./assets/hdr-bloom-white.png");
+	--bloom-orange: url("./assets/hdr-bloom-orange.png");
+	--bloom-yellow: url("./assets/hdr-bloom-yellow.png");
+	--bloom-sky: url("./assets/hdr-bloom-sky.png");
+	--bloom-blush: url("./assets/hdr-bloom-blush.png");
+	--bloom-mint: url("./assets/hdr-bloom-mint.png");
+	--bloom-lavender: url("./assets/hdr-bloom-lavender.png");
+	--bloom-telegram: url("./assets/hdr-bloom-telegram.png");
+	--bloom-bluesky: url("./assets/hdr-bloom-bluesky.png");
+	--bloom-discord: url("./assets/hdr-bloom-discord.png");
+	--bloom-fluxer: url("./assets/hdr-bloom-fluxer.png");
+	--bloom-github: url("./assets/hdr-bloom-github.png");
+	--bloom-x: url("./assets/hdr-bloom-x.png");
+	--bloom-night: url("./assets/hdr-bloom-night.png");
+	--hdr-accent-text: url("./assets/hdr-bloom-accent-text.png");
+	--hdr-ink-text: url("./assets/hdr-bloom-ink-text.png");
+	/* what untinted glass blooms with, overridden for dark mode below */
+	--bloom-panel: var(--bloom-white);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bloom-panel: var(--bloom-night);
+	}
+}
+
+.hdr-enabler {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 1px;
+	height: 1px;
+	background: url("./assets/hdr-white.png");
+	pointer-events: none;
+	user-select: none;
+}
+
+/* scripts/prerenderHero.mjs: only the 3D canvas, on a transparent page */
+html[data-prerender],
+html[data-prerender] body {
+	background: transparent;
+}
+
+html[data-prerender] .page * {
+	visibility: hidden;
+	animation: none !important;
+	transition: none !important;
+}
+
+html[data-prerender] .page canvas[data-stage] {
+	visibility: visible;
 }

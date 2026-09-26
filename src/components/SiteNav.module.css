@@ -1,0 +1,82 @@
+.header {
+	position: sticky;
+	top: calc(0.75rem + env(safe-area-inset-top, 0px));
+	z-index: 50;
+	display: flex;
+	justify-content: center;
+	padding-inline: var(--gutter);
+	pointer-events: none;
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.35rem;
+	border-radius: 999px;
+	corner-shape: round;
+	pointer-events: auto;
+	animation: drop-in 0.9s var(--spring) both;
+}
+
+@keyframes drop-in {
+	from {
+		transform: translateY(-160%) rotate(-4deg);
+	}
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding-right: 0.5rem;
+	padding-left: 0.6rem;
+	font-family: var(--font-display);
+	font-weight: 700;
+	font-size: 1.1rem;
+	text-decoration: none;
+}
+
+.tld {
+	color: var(--orange-text);
+}
+
+.links {
+	display: flex;
+	gap: 0.15rem;
+	padding: 0;
+	list-style: none;
+}
+
+.link {
+	display: block;
+	padding: 0.35rem 0.8rem;
+	border-radius: 999px;
+	corner-shape: round;
+	font-weight: 600;
+	text-decoration: none;
+	transition:
+		background-color 0.2s,
+		transform 0.4s var(--spring);
+}
+
+.link:not([aria-current]):hover {
+	background: var(--cream-2);
+}
+
+.link[aria-current="page"] {
+	--c: var(--orange);
+	--bloom: var(--bloom-orange);
+	color: #2b1508;
+}
+
+@media (max-width: 30rem) {
+	/* no room for the brand next to the links, and "home" is right there */
+	.brand {
+		display: none;
+	}
+
+	.link {
+		padding-inline: 0.65rem;
+	}
+}

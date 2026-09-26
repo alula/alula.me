@@ -212,3 +212,6 @@ dist-ssr
 /blob-report/
 /playwright/.cache/
 # End of https://www.toptal.com/developers/gitignore/api/nextjs,yarn,node,react
+
+/.tanstack/
+/scratch/

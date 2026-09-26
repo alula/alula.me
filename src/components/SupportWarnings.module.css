@@ -1,0 +1,23 @@
+.warnings {
+	display: grid;
+	gap: 0.2rem;
+	max-width: 46rem;
+	margin: 2.5rem auto 0;
+	padding: 0.7rem 1.1rem;
+	border: 1px dashed var(--edge);
+	border-radius: 1rem;
+	font-family: var(--font-mono);
+	font-size: 0.78rem;
+	color: var(--ink-soft);
+}
+
+.label {
+	font-weight: 700;
+	color: var(--orange-text);
+}
+
+@media (max-width: 52rem) {
+	.warnings {
+		margin-inline: var(--gutter);
+	}
+}

@@ -1,0 +1,88 @@
+.card {
+	/* flat panel: the cel shade crescent is too busy behind a wall of text */
+	--cs: var(--c, var(--panel));
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding: 1.2rem 1.35rem 1.1rem;
+	isolation: isolate;
+}
+
+/* Beat the reveal's transition once it's in, so hover feels springy. */
+.card[data-in] {
+	transition:
+		opacity 0.5s var(--ease-out),
+		transform 0.5s var(--spring);
+	transition-delay: 0s;
+}
+
+.card:focus-within {
+	outline: 3px dashed var(--orange-deep);
+	outline-offset: 4px;
+}
+
+.name {
+	display: flex;
+	align-items: baseline;
+	gap: 0.35rem;
+	font-size: 1.3rem;
+	font-weight: 700;
+	line-height: 1.15;
+}
+
+.name a {
+	text-decoration: none;
+}
+
+.name a:focus-visible {
+	outline: none;
+}
+
+/* stretch the title link over the whole card */
+.name a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+}
+
+.description {
+	flex: 1;
+	color: var(--ink-soft);
+	font-size: 0.93rem;
+	line-height: 1.45;
+}
+
+.arrow {
+	flex-shrink: 0;
+	width: 0.9em;
+	height: 0.9em;
+	color: var(--orange-text);
+	opacity: 0;
+	transform: translate(-4px, 4px);
+	transition:
+		opacity 0.2s,
+		transform 0.35s var(--spring);
+}
+
+.card:hover .arrow {
+	opacity: 1;
+	transform: none;
+}
+
+.meta {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0.2rem 1rem;
+	margin-top: 0.3rem;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--ink-soft);
+	opacity: 0.8;
+}
+
+.tags {
+	color: var(--orange-text);
+}
