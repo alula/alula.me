@@ -15,7 +15,6 @@
     "jsx": "preserve",
     "incremental": true,
     "types": [
-      "vite/client",
       "./src/vite-plugins/webring.d.ts"
     ],
     "paths": {

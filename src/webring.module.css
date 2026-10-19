@@ -1,46 +1,29 @@
-.body {
-	display: grid;
-	gap: 3rem;
-	max-width: var(--max);
+.container {
+	max-width: 1024px;
 	margin: 0 auto;
-	padding: 0 var(--gutter);
+	padding-top: 2rem;
 }
 
-.aside {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-	gap: 1.5rem;
-	align-items: start;
-}
-
-.card {
-	padding: 1.3rem 1.5rem 1.4rem;
-}
-
-.card h2 {
-	margin-bottom: 0.5rem;
-	font-size: 1.4rem;
+.container h1 {
+	font-size: 2rem;
 	font-weight: 700;
+	margin-bottom: 1rem;
 }
 
-.card p {
-	color: var(--ink-soft);
-}
-
-.card code {
-	font-family: var(--font-mono);
-	font-size: 0.85em;
-}
-
-.join {
-	display: inline-block;
-	margin-top: 0.8rem;
-	color: var(--orange-text);
+.container h2 {
+	font-size: 1.25rem;
 	font-weight: 700;
-	text-decoration-thickness: 2px;
-	text-underline-offset: 3px;
+	margin-bottom: 1rem;
 }
 
-.join:hover {
-	text-decoration-style: wavy;
+.container p {
+	margin-bottom: 1rem;
+}
+
+.webring {
+	margin-top: 2rem;
+}
+
+.webring a {
+	margin: 0.1rem;
 }
